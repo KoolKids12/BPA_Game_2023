@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
    
-    float zoom;
+    float zoom = 10;
     Vector2 moveDirection;
 
 
@@ -17,13 +17,22 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * zoom;
         
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
        
         moveDirection = new Vector2(moveX, moveY).normalized;
+
+        if((cam.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoom) >= 10)
+        {
+
+        }
+        else
+        {
+            cam.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoom;
+        }
+
     }
 
      private void FixedUpdate()
