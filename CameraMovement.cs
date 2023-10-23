@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
    
-    float zoom = 10;
+    [SerializeField] float zoom = 10f;
     Vector2 moveDirection;
 
 
@@ -17,22 +17,24 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(cam.fieldOfView >=10 && cam.fieldOfView <= 155 )
+        {
+            cam.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoom;
+        }
+        else if(cam.fieldOfView < 10)
+        {
+             cam.fieldOfView = 10;
+        }
+        else if(cam.fieldOfView > 155)
+        {
+            cam.fieldOfView = 155;
+        }
         
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
        
         moveDirection = new Vector2(moveX, moveY).normalized;
-
-        if((cam.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoom) >= 10)
-        {
-
-        }
-        else
-        {
-            cam.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * zoom;
-        }
-
     }
 
      private void FixedUpdate()
