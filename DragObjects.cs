@@ -8,16 +8,15 @@ public class DragObjects : MonoBehaviour
   private bool open = false;
   private Vector3 offset;
   private Vector3 placement;
-
   [SerializeField] Camera cam;
 
   void Start() {
     cam.enabled = true;
   }
+ private void OnMouseOver() 
+    {
 
-  void Update() {
-
-    if(Input.GetMouseButtonDown(1))
+    if (Input.GetMouseButtonDown(1)) 
     {
       if(open == false)
       {
@@ -29,6 +28,9 @@ public class DragObjects : MonoBehaviour
         open = false;
       }
     }
+    
+    }
+  void Update() {
 
     placement.x = transform.position.x;
     placement.y = transform.position.y;
@@ -66,6 +68,7 @@ public class DragObjects : MonoBehaviour
 
   private void OnMouseDown() {
     offset = transform.position - cam.ScreenToWorldPoint(Input.mousePosition);
+
     dragging = true;
   }
 
