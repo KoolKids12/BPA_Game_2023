@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CoalGen : MonoBehaviour
+{
+    [SerializeField] int coal = 0;
+    float TimeInterval;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        GameObject[] Gens1 = GameObject.FindGameObjectsWithTag("CoalGen1");
+
+        
+        int cgens1 = Gens1.Length;
+
+        if (TimeInterval >= 3)
+        {
+            if (coal <= 9999999)
+            {
+                coal += (1 * cgens1);
+            }
+        }
+
+        GameObject[] Gens2 = GameObject.FindGameObjectsWithTag("CoalGen2");
+
+        
+        int cgens2 = Gens2.Length;
+
+        if (TimeInterval >= 2)
+        {
+            if (coal <= 9999999)
+            {
+                coal += (1 * cgens1);
+            }
+        }
+
+        GameObject[] Gens3 = GameObject.FindGameObjectsWithTag("CoalGen3");
+
+        
+        int cgens3 = Gens3.Length;
+
+        if (TimeInterval >= 2)
+        {
+            if (coal <= 9999999)
+            {
+                coal += (2 * cgens1);
+            }
+        }
+    }
+}
