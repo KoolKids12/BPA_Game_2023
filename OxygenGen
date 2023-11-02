@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class OxygenGen : MonoBehaviour
+{
+    [SerializeField] int oxygen = 0;
+    float TimeInterval;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        GameObject[] Gens1 = GameObject.FindGameObjectsWithTag("OxygenGen1");
+
+        
+        int ogens1 = Gens1.Length;
+
+        if (TimeInterval >= 3)
+        {
+            if (oxygen <= 9999999)
+            {
+                oxygen += (1 * ogens1);
+            }
+        }
+
+        GameObject[] Gens2 = GameObject.FindGameObjectsWithTag("OxygenGen2");
+
+        
+        int ogens2 = Gens2.Length;
+
+        if (TimeInterval >= 2)
+        {
+            if (oxygen <= 9999999)
+            {
+                oxygen += (1 * ogens2);
+            }
+        }
+
+        GameObject[] Gens3 = GameObject.FindGameObjectsWithTag("OxygenGen3");
+
+        
+        int ogens3 = Gens3.Length;
+
+        if (TimeInterval >= 2)
+        {
+            if (oxygen <= 9999999)
+            {
+                oxygen += (2 * ogens3);
+            }
+        }
+    }
+}
