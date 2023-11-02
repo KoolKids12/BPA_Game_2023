@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RholiumGen : MonoBehaviour
+{
+    [SerializeField] int refinedholium = 0;
+    float TimeInterval;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        GameObject[] Gens1 = GameObject.FindGameObjectsWithTag("RefinedHoliumGen1");
+
+        
+        int rhgens1 = Gens1.Length;
+
+        if (TimeInterval >= 3)
+        {
+            if (refinedholium <= 9999999)
+            {
+                refinedholium += (1 * rhgens1);
+            }
+        }
+
+        GameObject[] Gens2 = GameObject.FindGameObjectsWithTag("RefinedHoliumGen2");
+
+        
+        int rhgens2 = Gens2.Length;
+
+        if (TimeInterval >= 2)
+        {
+            if (refinedholium <= 9999999)
+            {
+                refinedholium += (1 * rhgens1);
+            }
+        }
+
+        GameObject[] Gens3 = GameObject.FindGameObjectsWithTag("RefinedHoliumGen3");
+
+        
+        int rhgens3 = Gens3.Length;
+
+        if (TimeInterval >= 2)
+        {
+            if (refinedholium <= 9999999)
+            {
+                refinedholium += (2 * rhgens1);
+            }
+        }
+    }
+}
