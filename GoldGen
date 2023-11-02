@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GoldGen : MonoBehaviour
+{
+    [SerializeField] int gold = 0;
+    float TimeInterval;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        GameObject[] Gens1 = GameObject.FindGameObjectsWithTag("GoldGen1");
+
+        
+        int ggens1 = Gens1.Length;
+
+        if (TimeInterval >= 3)
+        {
+            if (gold <= 9999999)
+            {
+                gold += (1 * ggens1);
+            }
+        }
+
+        GameObject[] Gens2 = GameObject.FindGameObjectsWithTag("GoldGen2");
+
+        
+        int ggens2 = Gens2.Length;
+
+        if (TimeInterval >= 2)
+        {
+            if (gold <= 9999999)
+            {
+                gold += (1 * ggens1);
+            }
+        }
+
+        GameObject[] Gens3 = GameObject.FindGameObjectsWithTag("GoldGen3");
+
+        
+        int ggens3 = Gens3.Length;
+
+        if (TimeInterval >= 2)
+        {
+            if (gold <= 9999999)
+            {
+                gold += (2 * ggens1);
+            }
+        }
+    }
+}
