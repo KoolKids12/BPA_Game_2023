@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class OxygenGen : MonoBehaviour
 {
-    [SerializeField] int oxygen = 0;
+    [SerializeField] public int oxygen = 0;
     float TimeInterval;
+    [SerializeField] int time=3;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class OxygenGen : MonoBehaviour
         
         int ogens1 = Gens1.Length;
 
-        if (TimeInterval >= 3)
+        if (TimeInterval >= time)
         {
             if (oxygen <= 9999999)
             {
@@ -34,11 +35,11 @@ public class OxygenGen : MonoBehaviour
         
         int ogens2 = Gens2.Length;
 
-        if (TimeInterval >= 2)
+        if (TimeInterval >= time)
         {
             if (oxygen <= 9999999)
             {
-                oxygen += (1 * ogens2);
+                oxygen += (2 * ogens2);
             }
         }
 
@@ -47,11 +48,11 @@ public class OxygenGen : MonoBehaviour
         
         int ogens3 = Gens3.Length;
 
-        if (TimeInterval >= 2)
+        if (TimeInterval >= time)
         {
             if (oxygen <= 9999999)
             {
-                oxygen += (2 * ogens3);
+                oxygen += (3 * ogens3);
             }
         }
     }
