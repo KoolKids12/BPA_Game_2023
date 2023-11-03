@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GoldGen : MonoBehaviour
 {
-    [SerializeField] int gold = 0;
+    [SerializeField] public int gold = 0;
     float TimeInterval;
+    [SerializeField] float time = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class GoldGen : MonoBehaviour
         
         int ggens1 = Gens1.Length;
 
-        if (TimeInterval >= 3)
+        if (TimeInterval >= time)
         {
             if (gold <= 9999999)
             {
@@ -34,11 +35,11 @@ public class GoldGen : MonoBehaviour
         
         int ggens2 = Gens2.Length;
 
-        if (TimeInterval >= 2)
+        if (TimeInterval >= time)
         {
             if (gold <= 9999999)
             {
-                gold += (1 * ggens1);
+                gold += (2 * ggens1);
             }
         }
 
@@ -47,11 +48,11 @@ public class GoldGen : MonoBehaviour
         
         int ggens3 = Gens3.Length;
 
-        if (TimeInterval >= 2)
+        if (TimeInterval >= time)
         {
             if (gold <= 9999999)
             {
-                gold += (2 * ggens1);
+                gold += (3 * ggens1);
             }
         }
     }
