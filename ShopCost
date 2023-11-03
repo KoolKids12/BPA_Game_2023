@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ShopCost : MonoBehaviour
+{
+    public GameObject Prefab;
+    public Transform loadpoint;
+    [SerializeField]public int isEnoughCoal, isEnoughGold, isEnoughOxygen, isEnoughRholium;
+    [SerializeField] public CoalGen coalGen;
+    [SerializeField] public GoldGen goldGen;
+    [SerializeField] public OxygenGen oxygenGen;
+    [SerializeField] public RholiumGen refinedHoliumGen;
+    public int otherobj;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    public void SpawnBuilding()
+    {
+        if (coalGen.coal >= isEnoughCoal && goldGen.gold >= isEnoughGold && oxygenGen.oxygen >= isEnoughOxygen && refinedHoliumGen.refinedholium >= isEnoughRholium)
+        {
+            GameObject Square = Instantiate(Prefab, loadpoint.position, loadpoint.rotation);
+        }
+    }
+}
