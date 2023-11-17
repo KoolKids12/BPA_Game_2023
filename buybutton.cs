@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class buybutton : MonoBehaviour
 {
-    public GameObject = SpawnGrunt;
-    public GameObject = SpawnHogRider;
-    public GameObject = SpawnArmVikingGuy;
+    public GameObject SpawnGrunt;
+    public GameObject SpawnHogRider;
+    public GameObject SpawnArmVikingGuy;
 
-    public GameObject SquarePrefab;
+    public GameObject GruntPrefab;
+    public GameObject HogRiderPrefab;
+    public GameObject ArmVikingGuyPrefab;
     [SerializeField] public bool spawningEnabled1 = false;
     [SerializeField] public bool spawningEnabled2 = false;
     [SerializeField] public bool spawningEnabled3 = false;
@@ -21,76 +23,119 @@ public class buybutton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawningEnabled1 && clicksRemaining1 > 0 && Input.GetMouseButtonDown(0))
+        if (spawningEnabled1 == true && spawningEnabled2 == false && spawningEnabled3 == false && clicksRemaining1 >0)
         {
-            SpawnBuilding();
+            if (Input.GetMouseButtonDown(0))
+            {
+            SpawnTroop1();
             clicksRemaining1--;
+            
 
             if (clicksRemaining1 == 0)
             {
                 Debug.Log("No more clicks remaining");
                 spawningEnabled1 = false;
             }
+            }
         }
-        else if (spawningEnabled2 && clicksRemaining2 > 0 && Input.GetMouseButtonDown(0))
+        else if (spawningEnabled1 == false && spawningEnabled2 == true && spawningEnabled3 == false && clicksRemaining2 >0)
         {
-            SpawnBuilding();
+            if (Input.GetMouseButtonDown(0))
+            {
+            SpawnTroop2();
             clicksRemaining2--;
+            
 
             if (clicksRemaining2 == 0)
             {
                 Debug.Log("No more clicks remaining");
                 spawningEnabled2 = false;
             }
+            }
         }
-        else if (spawningEnabled3 && clicksRemaining3 > 0 && Input.GetMouseButtonDown(0))
+        else if (spawningEnabled1 == false && spawningEnabled2 == false && spawningEnabled3 == true && clicksRemaining1 >0)
         {
-            SpawnBuilding();
+            if (Input.GetMouseButtonDown(0))
+            {
+            SpawnTroop3();
             clicksRemaining3--;
+            
 
             if (clicksRemaining3 == 0)
             {
                 Debug.Log("No more clicks remaining");
                 spawningEnabled3 = false;
             }
+            }
+        }
+        else
+        {
+            spawningEnabled1 = false;
+            spawningEnabled2 = false;
+            spawningEnabled3 = false;
         }
     }
 
-    public void ButtonGrunt()
+    public void Button1Click()
     {
-        if (gameObject.tag == "GruntSpawn")
+        if (spawningEnabled1 == false && spawningEnabled2 == false && spawningEnabled3 == false)
         {
             spawningEnabled1 = true;
-            spawningEnabled2 = false;
-            spawningEnabled3 = false;
+            clicksRemaining1 = 10;
+        }
+        else
+        {
+            spawningEnabled1 = false;
         }
     }
 
-    public void ButtonHogRider()
+    public void Button2Click()
     {
-        if (gameObject.tag == "HogRiderSpawn")
+        if (spawningEnabled1 == false && spawningEnabled2 == false && spawningEnabled3 == false)
         {
-            spawningEnabled1 = false;
             spawningEnabled2 = true;
+            clicksRemaining2 = 10;
+        }
+        else
+        {
+            spawningEnabled2 = false;
+        }
+    }
+
+    public void Button3Click()
+    {
+        if (spawningEnabled1 == false && spawningEnabled2 == false && spawningEnabled3 == false)
+        {
+            spawningEnabled3 = true;
+            clicksRemaining3 = 10;
+        }
+        else
+        {
             spawningEnabled3 = false;
         }
     }
 
-    public void ButtonArmVikingGuy()
-    {
-        if (gameObject.tag == "ArmVikingGuySpawn")
-        {
-            spawningEnabled1 = false;
-            spawningEnabled2 = false;
-            spawningEnabled3 = true;
-        }
-    }
-
-    void SpawnBuilding()
+    void SpawnTroop1()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = 10f;
         Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Instantiate(SquarePrefab, spawnPosition, Quaternion.identity);
+        Instantiate(GruntPrefab, spawnPosition, Quaternion.identity);
+    }
+
+    void SpawnTroop2()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = 10f;
+        Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Instantiate(HogRiderPrefab, spawnPosition, Quaternion.identity);
+    }
+
+    void SpawnTroop3()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = 10f;
+        Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Instantiate(ArmVikingGuyPrefab, spawnPosition, Quaternion.identity);
     }
 }
