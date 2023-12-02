@@ -22,7 +22,7 @@ public class SaveAndLoad : MonoBehaviour
     {
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
 
-        for  ( i = 1; i<= allObjects.Length; i++)
+        for  ( i = 0; i<= allObjects.Length; i++)
         {
             SaveObject saveObject = new SaveObject
             {
@@ -55,7 +55,7 @@ public class SaveAndLoad : MonoBehaviour
 
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
 
-        for  ( i = 1; i<= allObjects.Length; i++)
+        for  ( i = 0; i<= allObjects.Length; i++)
         {
             json = SaveSystem.Load(i);
         
@@ -65,7 +65,7 @@ public class SaveAndLoad : MonoBehaviour
 
            //Debug.Log(remover[i]);
 
-            Destroy(remover[i]);
+            //Destroy(remover[i-1]);
             
             if(loadedObject.tagg == "RefinedHolium1")
             {
