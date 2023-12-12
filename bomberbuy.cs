@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buybutton : MonoBehaviour
+public class bomberbuybutton : MonoBehaviour
 {
-    public GameObject SquarePrefab;
+    public GameObject BomberPrefab; // Reference to the Bomber prefab
     private bool spawningEnabled = false;
     private int clicksRemaining = 0;
 
@@ -13,7 +13,7 @@ public class buybutton : MonoBehaviour
     {
         if (spawningEnabled && clicksRemaining > 0 && Input.GetMouseButtonDown(0))
         {
-            SpawnBuilding();
+            SpawnBomber();
             clicksRemaining--;
 
             if (clicksRemaining == 0)
@@ -23,20 +23,20 @@ public class buybutton : MonoBehaviour
             }
         }
     }
-    
 
-    public void BuyButtonClicked()
+    public void BomberButtonClicked()
     {
         spawningEnabled = true;
         clicksRemaining = 10;
-        Debug.Log("Buy button clicked! You have 10 clicks to spawn the block.");
+        Debug.Log("Buy button clicked! You have 10 clicks to spawn the bomber.");
     }
 
-    void SpawnBuilding()
+    void SpawnBomber()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = 10f;
         Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Instantiate(SquarePrefab, spawnPosition, Quaternion.identity);
+        GameObject bomber = Instantiate(BomberPrefab, spawnPosition, Quaternion.identity);
+        bomber.tag = "Square"; // Set the tag to "Square"
     }
 }
