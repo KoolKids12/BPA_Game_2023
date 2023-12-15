@@ -4,39 +4,41 @@ using UnityEngine;
 
 public class buybutton : MonoBehaviour
 {
-    public GameObject SquarePrefab;
-    private bool spawningEnabled = false;
-    private int clicksRemaining = 0;
+     public GameObject SquarePrefab, temp;
+    public Transform loadpoint;
+    private Engineer engineer;
+    private Vector3 loacte;
+    private GameObject thing;
+    void Start()
+    {
+
+
+
+    }
 
     // Update is called once per frame
-    void Update()
+     public void SpawnBuilding()
     {
-        if (spawningEnabled && clicksRemaining > 0 && Input.GetMouseButtonDown(0))
+        if(engineer.architect >= 1)
         {
-            SpawnBuilding();
-            clicksRemaining--;
+             thing = Instantiate(temp, loadpoint.position, loadpoint.rotation);
+            
+            loacte = (temp.transform.position);
 
-            if (clicksRemaining == 0)
-            {
-                Debug.Log("No more clicks remaining");
-                spawningEnabled = false;
-            }
+            engineer.architect--;
+
+                Invoke(nameof(Maker), 5);
+
+            
+            
         }
-    }
-    
 
-    public void BuyButtonClicked()
-    {
-        spawningEnabled = true;
-        clicksRemaining = 10;
-        Debug.Log("Buy button clicked! You have 10 clicks to spawn the block.");
     }
-
-    void SpawnBuilding()
+    void Maker()
     {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = 10f;
-        Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Instantiate(SquarePrefab, spawnPosition, Quaternion.identity);
+        engineer.architect++;
+
+            Destroy(thing);
+            GameObject thing1 = Instantiate(SquarePrefab, loacte, loadpoint.rotation);
     }
 }
