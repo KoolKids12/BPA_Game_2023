@@ -12,8 +12,13 @@ public class Troop : MonoBehaviour
     public float attackInterval = 1.3f; // Set the attack cooldown
     private float nextAttackTime;
 
+    [SerializeField] public int maxhealth = 5;
+    [SerializeField] public int currenthealth;
+
     void Start()
     {
+        currenthealth = maxhealth;
+
         target = GameObject.FindGameObjectWithTag("Building").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -107,7 +112,18 @@ public class Troop : MonoBehaviour
         }
         else
         {
+
         }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currenthealth -= damage;
+
+        if (currenthealth <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
