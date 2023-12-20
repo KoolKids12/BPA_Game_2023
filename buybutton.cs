@@ -4,41 +4,22 @@ using UnityEngine;
 
 public class buybutton : MonoBehaviour
 {
-     public GameObject SquarePrefab, temp;
+     public GameObject SquarePrefab;
     public Transform loadpoint;
-    private Engineer engineer;
-    private Vector3 loacte;
-    private GameObject thing;
+    
+    // Start is called before the first frame update
     void Start()
     {
-
-
-
+     
     }
 
     // Update is called once per frame
      public void SpawnBuilding()
     {
-        if(engineer.architect >= 1)
-        {
-             thing = Instantiate(temp, loadpoint.position, loadpoint.rotation);
-            
-            loacte = (temp.transform.position);
-
-            engineer.architect--;
-
-                Invoke(nameof(Maker), 5);
-
-            
-            
-        }
-
+        GameObject Square = Instantiate(SquarePrefab, loadpoint.position, loadpoint.rotation);
     }
-    void Maker()
+    void Update()
     {
-        engineer.architect++;
-
-            Destroy(thing);
-            GameObject thing1 = Instantiate(SquarePrefab, loacte, loadpoint.rotation);
+        
     }
 }
