@@ -9,6 +9,7 @@ public class GoldGen : MonoBehaviour
     [SerializeField] private int collectCap = 20;
     float TimeInterval;
     [SerializeField] float time=3;
+    private ResourceManager recourceManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +70,8 @@ public class GoldGen : MonoBehaviour
         {
             gold += collectgold;
            collectgold = 0;                 
+
+           recourceManager.gold = gold;
         } 
 
     }

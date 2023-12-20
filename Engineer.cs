@@ -8,16 +8,28 @@ public class Engineer : MonoBehaviour
 
     private void Start() {
         GameObject[] build1 = GameObject.FindGameObjectsWithTag("Engineer1");
-        int engineer = build1.Length;
-        architect = 2 * engineer;
-
+       
         GameObject[] build2 = GameObject.FindGameObjectsWithTag("Engineer2");
-         engineer = build1.Length;
-        architect = 4 * engineer;
-        
+       
         GameObject[] build3 = GameObject.FindGameObjectsWithTag("Engineer3");
-         engineer = build1.Length;
-        architect = 6 * engineer;
-        
+         
+        if(build1.Length > 0)
+        {
+        architect = 2;
+        Debug.Log("Engineer1");
+        }
+        else if(build2.Length > 0)
+        {
+        architect = 4;
+        Debug.Log("Engineer2");
+        }
+        else if(build3.Length > 0)
+        {
+        architect = 6;
+
+        Debug.Log("Engineer3");
+         }
+
+        Debug.Log(architect);
     }
 }

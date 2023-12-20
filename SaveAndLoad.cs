@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+
 
 public class SaveAndLoad : MonoBehaviour
 {
@@ -11,13 +11,15 @@ public class SaveAndLoad : MonoBehaviour
 
     
     private string json = "";
-     private int i;
+    private int i;
     [SerializeField] public GameObject Coal1, Coal2, Coal3, Gold1, Gold2, Gold3, Oxy1, Oxy2, Oxy3, Rholium1, Rholium2, Rholium3, Builder1, Builder2, Builder3;
 
     private CoalGen coalGen;
     private GoldGen goldGen;
     private OxyGen oxyGen;
     private RholiumGen rholiumGenGen;
+    private ResourceManager resourceManager;
+
     void Awake() 
     {
         SaveSystem.Init();
@@ -28,7 +30,7 @@ public class SaveAndLoad : MonoBehaviour
     {
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
 
-        for  ( i = 0; i<= allObjects.Length; i++)
+        for  ( i = 0; i<= allObjects.Length - 1; i++)
         {
             
             GameObject coalob1;
@@ -50,6 +52,9 @@ public class SaveAndLoad : MonoBehaviour
             rholiumob1 = GameObject.FindGameObjectWithTag("RefinedHolium1");
 
             rholiumGenGen = rholiumob1.GetComponent<RholiumGen>();
+
+
+            
         
         
             SaveObject saveObject = new SaveObject
@@ -60,10 +65,10 @@ public class SaveAndLoad : MonoBehaviour
 
                 names = allObjects[i].name,
 
-                gold = goldGen.gold,
-                rholium = rholiumGenGen.refinedholium,
-                coal = coalGen.coal,
-                oxy= oxyGen.oxygen,
+                gold = resourceManager.gold,
+                rholium = resourceManager.refinedHolium,
+                coal = resourceManager.coal,
+                oxy= resourceManager.oxygen,
             };
             
             json = JsonUtility.ToJson(saveObject);
@@ -76,7 +81,7 @@ public class SaveAndLoad : MonoBehaviour
         }
         
         
-
+        return;
         
 
 
@@ -151,6 +156,7 @@ public class SaveAndLoad : MonoBehaviour
             {
                 coalGen = coalob1.GetComponent<CoalGen>();
                 coalGen.coal = loadedObject.coal;
+
             }
             
 
@@ -159,7 +165,7 @@ public class SaveAndLoad : MonoBehaviour
             if(goldob1 != null)
             {
                 goldGen = goldob1.GetComponent<GoldGen>();
-                goldGen.gold =loadedObject.gold;  
+                goldGen.gold = loadedObject.gold;  
             }
             
             
@@ -177,6 +183,76 @@ public class SaveAndLoad : MonoBehaviour
             if(rholiumob1 != null)
             {
                 rholiumGenGen = rholiumob1.GetComponent<RholiumGen>();
+                rholiumGenGen.refinedholium = loadedObject.rholium;
+
+            }
+            
+            GameObject coalob2;
+            coalob2 = GameObject.FindGameObjectWithTag("Coal2");
+            if(coalob2 != null)
+            {
+                coalGen = coalob2.GetComponent<CoalGen>();
+                coalGen.coal = loadedObject.coal;
+            }
+            
+
+            GameObject goldob2;
+            goldob2 = GameObject.FindGameObjectWithTag("Gold2");
+            if(goldob2 != null)
+            {
+                goldGen = goldob2.GetComponent<GoldGen>();
+                goldGen.gold =loadedObject.gold;  
+            }
+            
+            
+            GameObject oxyob2;
+            oxyob2 = GameObject.FindGameObjectWithTag("Oxygen2");
+            if(oxyob2 != null)
+            {
+                oxyGen = oxyob2.GetComponent<OxyGen>();
+                oxyGen.oxygen = loadedObject.oxy;
+            }
+            
+            
+            GameObject rholiumob2;
+            rholiumob2 = GameObject.FindGameObjectWithTag("RefinedHolium2");
+            if(rholiumob2 != null)
+            {
+                rholiumGenGen = rholiumob2.GetComponent<RholiumGen>();
+                rholiumGenGen.refinedholium = loadedObject.rholium;
+            }
+            GameObject coalob3;
+            coalob3 = GameObject.FindGameObjectWithTag("Coal3");
+            if(coalob3 != null)
+            {
+                coalGen = coalob3.GetComponent<CoalGen>();
+                coalGen.coal = loadedObject.coal;
+            }
+            
+
+            GameObject goldob3;
+            goldob3 = GameObject.FindGameObjectWithTag("Gold3");
+            if(goldob3 != null)
+            {
+                goldGen = goldob3.GetComponent<GoldGen>();
+                goldGen.gold =loadedObject.gold;  
+            }
+            
+            
+            GameObject oxyob3;
+            oxyob3 = GameObject.FindGameObjectWithTag("Oxygen3");
+            if(oxyob3 != null)
+            {
+                oxyGen = oxyob3.GetComponent<OxyGen>();
+                oxyGen.oxygen = loadedObject.oxy;
+            }
+            
+            
+            GameObject rholiumob3;
+            rholiumob3 = GameObject.FindGameObjectWithTag("RefinedHolium3");
+            if(rholiumob3 != null)
+            {
+                rholiumGenGen = rholiumob3.GetComponent<RholiumGen>();
                 rholiumGenGen.refinedholium = loadedObject.rholium;
             }
 

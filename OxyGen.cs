@@ -9,6 +9,7 @@ public class OxyGen : MonoBehaviour
     [SerializeField] private int collectCap = 20;
     float TimeInterval;
     [SerializeField] float time=3;
+    private ResourceManager recourceManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,7 +69,8 @@ public class OxyGen : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             oxygen += collectoxygen;
-           collectoxygen = 0;                 
+           collectoxygen = 0;     
+           recourceManager.oxygen = oxygen;            
         } 
 
     }
