@@ -5,6 +5,7 @@ using UnityEngine;
 public class RholiumGen : MonoBehaviour
 {
     [SerializeField] public int refinedholium = 0;
+    [SerializeField] public int total = 0;
     [SerializeField] public int collectrefinedholium = 0;
     [SerializeField] private int collectCap = 20;
     float TimeInterval;
@@ -12,6 +13,7 @@ public class RholiumGen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        refinedholium = total;
         
     }
 
@@ -61,15 +63,18 @@ public class RholiumGen : MonoBehaviour
 
             }
         }
-
+        
+       
     }
-     private void OnMouseOver() 
+    private void OnMouseOver() 
     {
         if (Input.GetMouseButtonDown(0))
-        {
+        {  
             refinedholium += collectrefinedholium;
-           collectrefinedholium = 0;                 
+           collectrefinedholium = 0;               
+           ResourceManager.refinedHolium = refinedholium;  
+            
         } 
-
     }
+     
 }

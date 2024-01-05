@@ -61,13 +61,14 @@ public class CoalGen : MonoBehaviour
 
             }
         }
-
     }
      private void OnMouseOver() 
     {
         if (Input.GetMouseButtonDown(0))
         {
-            coal += collectcoal;
+            coal = collectcoal;
+
+            ResourceManager.coal += coal;
            collectcoal = 0;                 
         } 
 
