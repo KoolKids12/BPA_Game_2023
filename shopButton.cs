@@ -11,9 +11,9 @@ public class shopButton : MonoBehaviour
     public void SpawnBuilding()
     {
 
-        scaleChange = new Vector3(+1f, +1f, +0f);
+        scaleChange = new Vector3(.5f, .5f, +0f);
 
 
-        panel.transform.localScale += scaleChange;
+        panel.transform.localScale = scaleChange;
     }
 }

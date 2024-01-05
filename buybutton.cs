@@ -6,7 +6,6 @@ public class buybutton : MonoBehaviour
 {
      public GameObject SquarePrefab, temp;
     public Transform loadpoint;
-    private Engineer engineer;
     private Vector3 loacte;
     private GameObject thing;
     void Start()
@@ -19,13 +18,12 @@ public class buybutton : MonoBehaviour
     // Update is called once per frame
      public void SpawnBuilding()
     {
-        if(engineer.architect >= 1)
+        if(ResourceManager.architect >= 1)
         {
              thing = Instantiate(temp, loadpoint.position, loadpoint.rotation);
             
-            loacte = (temp.transform.position);
 
-            engineer.architect--;
+            ResourceManager.architect--;
 
                 Invoke(nameof(Maker), 5);
 
@@ -36,9 +34,9 @@ public class buybutton : MonoBehaviour
     }
     void Maker()
     {
-        engineer.architect++;
+        ResourceManager.architect++;
 
             Destroy(thing);
-            GameObject thing1 = Instantiate(SquarePrefab, loacte, loadpoint.rotation);
+            GameObject thing1 = Instantiate(SquarePrefab, loadpoint.position, loadpoint.rotation);
     }
 }

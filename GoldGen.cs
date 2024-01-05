@@ -69,6 +69,8 @@ public class GoldGen : MonoBehaviour
         {
             gold += collectgold;
            collectgold = 0;                 
+
+           ResourceManager.gold = gold;
         } 
 
     }

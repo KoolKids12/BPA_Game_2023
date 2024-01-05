@@ -68,7 +68,8 @@ public class OxyGen : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             oxygen += collectoxygen;
-           collectoxygen = 0;                 
+           collectoxygen = 0;     
+           ResourceManager.oxygen = oxygen;            
         } 
 
     }
