@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class BuildingProperties : MonoBehaviour
 {
-    [SerializeField] public int maxhealth = 3;
+    [SerializeField] public float maxhealth = 3;
 
-    [SerializeField] public int currenthealth;
+    [SerializeField] public float currenthealth;
 
     void Start()
     {
         currenthealth = maxhealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage) // function for the buildings to take damage
     {
         currenthealth -= damage;
         
-        if (currenthealth <= 0)
+        if (currenthealth <= 0) // if health is 0 or less destroy gameobject
         {
             DestroyBuilding();
         }

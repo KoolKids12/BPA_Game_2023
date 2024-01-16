@@ -3,22 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SaveAndLoad : MonoBehaviour
 {
     // Start is called before the first frame updatepublic class SaveAndLoad : MonoBehaviour
 
-    
+    // sets all the generators and gameobjects to instances of prefabricated objects
     private string json = "";
-     private int i;
-    [SerializeField] public GameObject Coal1, Coal2, Coal3, Gold1, Gold2, Gold3, Oxy1, Oxy2, Oxy3, Rholium1, Rholium2, Rholium3, Builder1, Builder2, Builder3;
+    private int i;
+    [SerializeField] public GameObject Coal1, Coal2, Coal3, Gold1, Gold2, Gold3, Oxy1, Oxy2, Oxy3, Rholium1, Rholium2, Rholium3, Builder1, Builder2, Builder3, Ballista, PumpkinLauncher, Bridge1, Bridge2, Bridge3, Masher, wall;
 
     private CoalGen coalGen;
     private GoldGen goldGen;
     private OxyGen oxyGen;
     private RholiumGen rholiumGenGen;
-    void Awake() 
+
+    void Awake() // it will start up the save system, and load the saved files if there are any
     {
         SaveSystem.Init();
         LoadGame();
@@ -26,33 +27,13 @@ public class SaveAndLoad : MonoBehaviour
     }
     public void SaveGame()
     {
-        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();   // an array of all the objects in the scene
 
-        for  ( i = 0; i<= allObjects.Length; i++)
+        for  ( i = 0; i<= allObjects.Length - 1; i++)   // goes through the list entry by entry
         {
-            
-            GameObject coalob1;
-            coalob1 = GameObject.FindGameObjectWithTag("Coal1");
-
-             coalGen = coalob1.GetComponent<CoalGen>();
-
-            GameObject goldob1;
-            goldob1 = GameObject.FindGameObjectWithTag("Gold1");
-
-            goldGen = goldob1.GetComponent<GoldGen>();
-            
-            GameObject oxyob1;
-            oxyob1 = GameObject.FindGameObjectWithTag("Oxygen1");
-
-            oxyGen = oxyob1.GetComponent<OxyGen>();
-            
-            GameObject rholiumob1;
-            rholiumob1 = GameObject.FindGameObjectWithTag("RefinedHolium1");
-
-            rholiumGenGen = rholiumob1.GetComponent<RholiumGen>();
         
         
-            SaveObject saveObject = new SaveObject
+            SaveObject saveObject = new SaveObject  // gets all the crucial information for recreation of the object on loading and saves the recources and troops 
             {
                 locate = allObjects[i].transform.position,
 
@@ -60,10 +41,14 @@ public class SaveAndLoad : MonoBehaviour
 
                 names = allObjects[i].name,
 
-                gold = goldGen.gold,
-                rholium = rholiumGenGen.refinedholium,
-                coal = coalGen.coal,
-                oxy= oxyGen.oxygen,
+                gold = ResourceManager.gold,
+                rholium = ResourceManager.refinedHolium,
+                coal = ResourceManager.coal,
+                oxy= ResourceManager.oxygen,
+                grunt = ResourceManager.grunt,
+                gobbler = ResourceManager.gobbler,
+                shocktrooper = ResourceManager.shocktrooper,
+                mech = ResourceManager.mech,
             };
             
             json = JsonUtility.ToJson(saveObject);
@@ -75,9 +60,6 @@ public class SaveAndLoad : MonoBehaviour
             
         }
         
-        
-
-        
 
 
     }
@@ -85,15 +67,18 @@ public class SaveAndLoad : MonoBehaviour
     public void LoadGame()
     {
 
-        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();    // an array of all the objects in the scene
 
-        for  ( i = 0; i<= allObjects.Length; i++)
+        for  ( i = 0; i<= allObjects.Length; i++)   // goes through the list entry by entry
+        {
         {
             json = SaveSystem.Load(i);
         
-            SaveObject loadedObject = JsonUtility.FromJson<SaveObject>(json);
+            SaveObject loadedObject = JsonUtility.FromJson<SaveObject>(json);   // // gets all the crucial information from the file and loads the object, the recources and troops 
 
-            if(loadedObject.tagg == "Coal1")
+            // this checks the file for what the object is and loads the correct object by the tag
+
+            if(loadedObject.tagg == "Coal1")   
             {
                 Instantiate(Coal1, loadedObject.locate, Quaternion.identity);
             }
@@ -144,64 +129,76 @@ public class SaveAndLoad : MonoBehaviour
             {
             Instantiate(Rholium3, loadedObject.locate, Quaternion.identity);
             }
-           
+            if(loadedObject.tagg == "Bridge1")
+            {
+            Instantiate(Bridge1, loadedObject.locate, Quaternion.identity);
+            }
+            if(loadedObject.tagg == "Bridge2")
+            {
+            Instantiate(Bridge2, loadedObject.locate, Quaternion.identity);
+            }
+            if(loadedObject.tagg == "Bridge3")
+            {
+            Instantiate(Bridge3, loadedObject.locate, Quaternion.identity);
+            }
+            if(loadedObject.tagg == "Wall")
+            {
+            Instantiate(wall, loadedObject.locate, Quaternion.identity);
+            }
+            if(loadedObject.tagg == "Pumpkin")
+            {
+            Instantiate(PumpkinLauncher, loadedObject.locate, Quaternion.identity);
+            }
+            if(loadedObject.tagg == "Masher")
+            {
+            Instantiate(Masher, loadedObject.locate, Quaternion.identity);
+            }
+            if(loadedObject.tagg == "Ballista")
+            {
+            Instantiate(Ballista, loadedObject.locate, Quaternion.identity);
+            }
+
             GameObject coalob1;
             coalob1 = GameObject.FindGameObjectWithTag("Coal1");
             if(coalob1 != null)
             {
                 coalGen = coalob1.GetComponent<CoalGen>();
                 coalGen.coal = loadedObject.coal;
+
             }
             
 
-            GameObject goldob1;
-            goldob1 = GameObject.FindGameObjectWithTag("Gold1");
-            if(goldob1 != null)
-            {
-                goldGen = goldob1.GetComponent<GoldGen>();
-                goldGen.gold =loadedObject.gold;  
-            }
-            
-            
-            GameObject oxyob1;
-            oxyob1 = GameObject.FindGameObjectWithTag("Oxygen1");
-            if(oxyob1 != null)
-            {
-                oxyGen = oxyob1.GetComponent<OxyGen>();
-                oxyGen.oxygen = loadedObject.oxy;
-            }
-            
-            
-            GameObject rholiumob1;
-            rholiumob1 = GameObject.FindGameObjectWithTag("RefinedHolium1");
-            if(rholiumob1 != null)
-            {
-                rholiumGenGen = rholiumob1.GetComponent<RholiumGen>();
-                rholiumGenGen.refinedholium = loadedObject.rholium;
-            }
+            ResourceManager.coal = loadedObject.coal;
+            ResourceManager.gold = loadedObject.gold;
+            ResourceManager.oxygen = loadedObject.oxy;
+            ResourceManager.refinedHolium = loadedObject.rholium;
+            ResourceManager.grunt = loadedObject.grunt;
+            ResourceManager.gobbler = loadedObject.gobbler;
+            ResourceManager.shocktrooper = loadedObject.shocktrooper;
+            ResourceManager.mech = loadedObject.mech;
 
-            
             
             
             
         
             
         }
+            return;
                
         Debug.Log("Loaded");
         
 
     }
 
-   
+    }
 }
 
-class SaveObject
+class SaveObject // holds the crucial data for saving and loading
 {
     public Vector3 locate;   
     public string tagg;
     public string names;
     public int oxy, gold, rholium, coal;
 
-   // public double grunt, shockTrooper, Gobbler, brute;
+    public int grunt, gobbler, shocktrooper, mech;
 }

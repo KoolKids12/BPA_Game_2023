@@ -6,12 +6,12 @@ public class Giant : MonoBehaviour
 {
     [SerializeField] public Troop giant;
 
-    public void SetTroop(Troop gint)
+    public void SetTroop(Troop gint) // gets the troop
     {
         giant = gint;
-        gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = 0.5f;
+        gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = 1f; // changes speed
 
-        if (giant != null)
+        if (giant != null) // checks if giant is there
         {
             giant.maxhealth = 15;
             giant.currenthealth = giant.maxhealth;
@@ -21,9 +21,9 @@ public class Giant : MonoBehaviour
 
     private void Start()
     {
-        gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = 1f;
+        gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = 1f; // changes speed
 
-        if (giant != null)
+        if (giant != null) // checks if giant is null
         {
             giant.maxhealth = 15;
             giant.currenthealth = giant.maxhealth;

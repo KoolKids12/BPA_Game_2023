@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopClose : MonoBehaviour
+public class UpgradeClose : MonoBehaviour
 {
   
     public GameObject panel;
@@ -12,7 +12,7 @@ public class ShopClose : MonoBehaviour
     public void SpawnBuilding()
     {
 
-        scaleChange = new Vector3(-1f, -1f, +0f); // scales panel out of existence
+        scaleChange = new Vector3(-1f, -1f, +0f); // scales the panel out of existence
 
 
         panel.transform.localScale += scaleChange;
